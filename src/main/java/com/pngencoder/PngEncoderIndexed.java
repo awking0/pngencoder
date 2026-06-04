@@ -58,9 +58,6 @@ public class PngEncoderIndexed {
                             int b = currRow[3] & 0xFF;
                             int a = currRow[4] & 0xFF;
                             int v = (a << 24) | (r << 16) | (g << 8) | b;
-                            if (a == 0) {
-                                v = 0;
-                            }
                             // initialise the first color slot
                             table.findColorLookup(v);
                             firstRow = false;
@@ -72,12 +69,7 @@ public class PngEncoderIndexed {
                             int g = currRow[readPtr++] & 0xFF;
                             int b = currRow[readPtr++] & 0xFF;
                             int a = currRow[readPtr++] & 0xFF;
-                            int v;
-                            if (a == 0) {
-                                v = 0;
-                            } else {
-                                v = (a << 24) | (r << 16) | (g << 8) | b;
-                            }
+                            int v = (a << 24) | (r << 16) | (g << 8) | b;
                             indexedRow[x] = table.findColor(v);
                         }
 
